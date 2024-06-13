@@ -6,7 +6,7 @@ st.set_page_config(page_title='Exercícios sobre MRUV para a prova de Física', 
 
 col1, col2 = st.columns(2)
 with col1:
-   apenas_int = st.toggle("Apenas números inteiros")
+   apenas_int = st.toggle("Apenas números inteiros", value=True)
 
 with col2:
    st.button("Nova questão")
@@ -25,8 +25,8 @@ def criar_equacao(apenas_int=False):
         sinal_b = (-1) ** random.randint(1, 2)
         sinal_c = (-1) ** random.randint(1, 2)
 
-        a = random.randint(1, 30) * sinal_a
-        b = random.randint(1, 30) * sinal_b
+        a = random.randint(1, 20) * sinal_a
+        b = random.randint(1, 50) * sinal_b
         c = random.randint(1, 30) * sinal_c
 
         if (apenas_int == True) and ((4 * a * c) > (b ** 2)) and (resolve_equacao(a, b, c)[0].real.is_integer()) and (resolve_equacao(a, b, c)[1].real.is_integer()) and (-b/(2*a)).is_integer():
@@ -290,25 +290,25 @@ with st.expander("Ver resposta"):
 st.subheader(f"K) A posição na qual o movimento muda de sentido", anchor=False)
 with st.expander("Ver resposta"):
     st.write("Para descobrir a posição na qual o movimento muda de sentido, usamos a resposta da questão j) aplicada na equação horária da velocidade")
-    st.latex(f"t = {((0 - b) / (2 * a)):+.0f} s")
+    st.latex(f"t = {((0 - b) / (2 * a)):+.2f} s")
     st.write(f"Para calcular a posição precisamos usar a equação horária da posição.")
     st.latex(f"S={c:+}{b:+}t{a:+}t²")
     st.write(
-        f"Como queremos calcular a posição no instante t = {((0 - b) / (2 * a)):+.0f} s, substítuímos t na equação acima por {((0 - b) / (2 * a)):.0f} s")
-    st.latex(f"S({((0 - b) / (2 * a)):+.0f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.0f}{a:+}\\times{((0 - b) / (2 * a)):.0f}²")
-    st.write(f"Primeiro resolvemos a potência {((0 - b) / (2 * a)):+.0f}².")
+        f"Como queremos calcular a posição no instante t = {((0 - b) / (2 * a)):+.2f} s, substítuímos t na equação acima por {((0 - b) / (2 * a)):.2f} s")
+    st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.2f}{a:+}\\times{((0 - b) / (2 * a)):.2f}²")
+    st.write(f"Primeiro resolvemos a potência {((0 - b) / (2 * a)):.2f}².")
     st.latex(
-        f"S({((0 - b) / (2 * a)):+.0f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.0f}{a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f}")
+        f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.2f}{a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}")
     st.markdown(
-        f"Agora resolvemos as multiplicações ${b:+}\\times{((0 - b) / (2 * a))}$ e ${a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f}$.")
-    st.latex(f"S({((0 - b) / (2 * a)):+.0f})={c:+}{b * ((0 - b) / (2 * a)):+}{a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f}")
+        f"Agora resolvemos as multiplicações ${b:+}\\times{((0 - b) / (2 * a)):+.2f}$ e ${a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}$.")
+    st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b * ((0 - b) / (2 * a)):+}{a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}")
     st.write(f"Finalmente, somamos todos os valores positivos e subtraímos todos os valores negativos.")
-    st.latex(f"S({((0 - b) / (2 * a)):+.0f})={c + b * ((0 - b) / (2 * a)) + a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f} m")
+    st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c + b * ((0 - b) / (2 * a)) + a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f} m")
 
 
     if -b/(2*a) < 0:
-        st.markdown("~~" + f"S({-b/(2*a):.0f}) = {posicao_no_instante_x(-b/(2*a)):.0f} m".replace('.', ',') + "~~" + " :x:")
+        st.markdown("~~" + f"S({-b/(2*a):.2f}) = {posicao_no_instante_x(-b/(2*a)):.2f} m".replace('.', ',') + "~~" + " :x:")
         st.markdown("O tempo negativo significa algo que aconteceu antes do início do movimento, o que não possui sentido físico. Em outras palavras, o objeto nunca esteve nem estará nessa posição.")
     else:
-        st.markdown(f"S({-b/(2*a):.0f}) = {posicao_no_instante_x(-b/(2*a)):.0f} m".replace('.', ',') + " :heavy_check_mark:")
+        st.markdown(f"S({-b/(2*a):.2f}) = {posicao_no_instante_x(-b/(2*a)):.2f} m".replace('.', ',') + " :heavy_check_mark:")
 
