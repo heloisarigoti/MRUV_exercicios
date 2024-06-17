@@ -3,9 +3,9 @@ import streamlit as st
 import cmath
 from streamlit_autorefresh import st_autorefresh
 
-st_autorefresh(interval=120*60*1000)
-
 st.set_page_config(page_title='Exercícios sobre MRUV para a prova de Física!', page_icon="🧠", layout = 'centered', initial_sidebar_state = 'collapsed')
+
+st_autorefresh(interval=120*60*1000)
 
 col1, col2 = st.columns(2)
 with col1:
@@ -296,17 +296,35 @@ with st.expander("Ver resposta"):
     st.latex(f"t = {((0 - b) / (2 * a)):+.2f} s")
     st.write(f"Para calcular a posição precisamos usar a equação horária da posição.")
     st.latex(f"S={c:+}{b:+}t{a:+}t²")
-    st.write(
-        f"Como queremos calcular a posição no instante t = {((0 - b) / (2 * a)):+.2f} s, substítuímos t na equação acima por {((0 - b) / (2 * a)):.2f} s")
-    st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.2f}{a:+}\\times{((0 - b) / (2 * a)):.2f}²")
-    st.write(f"Primeiro resolvemos a potência {((0 - b) / (2 * a)):.2f}².")
-    st.latex(
-        f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.2f}{a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}")
-    st.markdown(
-        f"Agora resolvemos as multiplicações ${b:+}\\times{((0 - b) / (2 * a)):+.2f}$ e ${a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}$.")
-    st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b * ((0 - b) / (2 * a)):+}{a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}")
-    st.write(f"Finalmente, somamos todos os valores positivos e subtraímos todos os valores negativos.")
-    st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c + b * ((0 - b) / (2 * a)) + a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f} m")
+
+    if apenas_int:
+        st.write(
+            f"Como queremos calcular a posição no instante t = {((0 - b) / (2 * a)):+.0f} s, substítuímos t na equação acima por {((0 - b) / (2 * a)):.0f} s")
+        st.latex(
+            f"S({((0 - b) / (2 * a)):+.0f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.0f}{a:+}\\times({((0 - b) / (2 * a)):.0f})²")
+        st.write(f"Primeiro resolvemos a potência {((0 - b) / (2 * a)):.0f}².")
+        st.latex(
+            f"S({((0 - b) / (2 * a)):+.0f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.0f}{a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f}")
+        st.markdown(
+            f"Agora resolvemos as multiplicações ${b:+}\\times{((0 - b) / (2 * a)):+.0f}$ e ${a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f}$.")
+        st.latex(
+            f"S({((0 - b) / (2 * a)):+.0f})={c:+}{b * ((0 - b) / (2 * a)):+.0f}{a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):+.0f}")
+        st.write(f"Finalmente, somamos todos os valores positivos e subtraímos todos os valores negativos.")
+        st.latex(
+            f"S({((0 - b) / (2 * a)):+.0f})={c + b * ((0 - b) / (2 * a)) + a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.0f} m")
+
+    else:
+        st.write(
+            f"Como queremos calcular a posição no instante t = {((0 - b) / (2 * a)):+.2f} s, substítuímos t na equação acima por {((0 - b) / (2 * a)):.2f} s")
+        st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.2f}{a:+}\\times({((0 - b) / (2 * a)):.2f})²")
+        st.write(f"Primeiro resolvemos a potência {((0 - b) / (2 * a)):.2f}².")
+        st.latex(
+            f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b:+}\\times{((0 - b) / (2 * a)):+.2f}{a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}")
+        st.markdown(
+            f"Agora resolvemos as multiplicações ${b:+}\\times{((0 - b) / (2 * a)):+.2f}$ e ${a:+}\\times{((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f}$.")
+        st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c:+}{b * ((0 - b) / (2 * a)):+.2f}{a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):+.2f}")
+        st.write(f"Finalmente, somamos todos os valores positivos e subtraímos todos os valores negativos.")
+        st.latex(f"S({((0 - b) / (2 * a)):+.2f})={c + b * ((0 - b) / (2 * a)) + a * ((0 - b) / (2 * a)) * ((0 - b) / (2 * a)):.2f} m")
 
 
     if -b/(2*a) < 0:
