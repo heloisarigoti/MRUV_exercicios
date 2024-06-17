@@ -1,18 +1,38 @@
 import random
 import streamlit as st
 import cmath
-# from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(page_title='Exercícios sobre MRUV para a prova de Física!', page_icon="🧠", layout = 'centered', initial_sidebar_state = 'collapsed')
 
-# st_autorefresh(interval=120*60*1000)
 
-col1, col2 = st.columns(2)
+seed = random.randint(10000, 99999)
+random.seed(seed)
+
+def codigo_into_seed(codigo, seed):
+    try:
+        int(codigo)
+        return codigo
+    except:
+        return seed
+
+col1, col2, col3 = st.columns(3)
 with col1:
    apenas_int = st.toggle("Apenas números inteiros", value=True)
 
 with col2:
-   st.button("Nova questão")
+   if st.button("Nova da questão"):
+       st.rerun()
+with col3:
+
+    with st.popover("Carregar questão"):
+        # st.markdown("Digite o código da questão.")
+        codigo = st.text_input("Digite o código da questão.", max_chars=5)
+        if st.button("Carregar"):
+            # st.rerun()
+            if len(codigo) == 5:
+                seed = codigo_into_seed(codigo, seed)
+
+    st.write(f"Código da questão atual: {seed}")
 
 def resolve_equacao(a, b, c):
     delta = (b ** 2) - (4 * a * c)
@@ -22,7 +42,8 @@ def resolve_equacao(a, b, c):
 
     return sol1, sol2
 
-def criar_equacao(apenas_int=False):
+def criar_equacao(seed, apenas_int=False,):
+    random.seed(seed)
     while True:
         sinal_a = (-1) ** random.randint(1, 2)
         sinal_b = (-1) ** random.randint(1, 2)
@@ -60,7 +81,7 @@ if i==4:
 if i==5:
     enunciado = "O Flash está correndo de acordo com a equação horária da posição"
 
-a, b, c, sinal_a, sinal_b, sinal_c = criar_equacao(apenas_int)
+a, b, c, sinal_a, sinal_b, sinal_c = criar_equacao(seed, apenas_int)
 
 st.header(enunciado + f" S={c:+}{b:+}t{a:+}t².", anchor = False)
 st.header("Determine:", anchor = False)
@@ -332,4 +353,3 @@ with st.expander("Ver resposta"):
         st.markdown("O tempo negativo significa algo que aconteceu antes do início do movimento, o que não possui sentido físico. Em outras palavras, o objeto nunca esteve nem estará nessa posição.")
     else:
         st.markdown(f"S({-b/(2*a):.2f}) = {posicao_no_instante_x(-b/(2*a)):.2f} m".replace('.', ',') + " :heavy_check_mark:")
-
