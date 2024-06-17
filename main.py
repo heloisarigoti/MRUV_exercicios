@@ -1,8 +1,11 @@
 import random
 import streamlit as st
 import cmath
+from streamlit_autorefresh import st_autorefresh
 
-st.set_page_config(page_title='Exercícios sobre MRUV para a prova de Física', page_icon="🧠", layout = 'centered', initial_sidebar_state = 'collapsed')
+st_autorefresh(interval=120*60*1000)
+
+st.set_page_config(page_title='Exercícios sobre MRUV para a prova de Física!', page_icon="🧠", layout = 'centered', initial_sidebar_state = 'collapsed')
 
 col1, col2 = st.columns(2)
 with col1:
