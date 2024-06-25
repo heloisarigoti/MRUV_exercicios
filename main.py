@@ -2,7 +2,7 @@ import random
 import streamlit as st
 import cmath
 
-if True:
+if False:
     st.set_page_config(page_title='Exercícios sobre MRUV para a prova de Física!', page_icon="🧠", layout = 'centered', initial_sidebar_state = 'collapsed')
 
 
